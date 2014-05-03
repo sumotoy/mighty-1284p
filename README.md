@@ -1,14 +1,19 @@
-# Mighty 1284P: Platform files for Arduino to run on ATmega1284P
+# Mighty 1284P: An Arduino core for the ATmega1284P #
+  
 
-## What is it?
+## What is it? ##
 
 Everything you need to run Arduino on ATmega1284P.
 
-## Current state
+## Revision history ##
 
-Everything is here and has been initially tested.  It should work fine.  There is more detailed testing which must be completed before calling it completely 'done' though.
+**03May2014 Jack Christensen**
+- An attempt to bring the mighty-1284p core up to Arduino 1.0.5 level. In researching the changes I came to the conclusion that the core was originally based on Arduino 1.0 and that since then all the changes in maniacbug's core files necessary to support the ATmega1284P had been worked into subsequent Arduino releases. This may have occurred as early as Arduino 1.0.1. Nevertheless, this update is working with Arduino 1.0.5 and while it may work with earlier releases, I do not plan to test them, so there is no guarantee.
+- The initial commit is therefore just a matter of removing the cores directory and updating the boards.txt file to point at the cores directory in the Arduino distribution.
 
-The platform now includes optiboot.  This bootloader is better in every way than the previous version, so it is recommended in all cases.  The prior one is included for reference.
+**23Jun2012 maniacbug**
+- Everything is here and has been initially tested.  It should work fine.  There is more detailed testing which must be completed before calling it completely 'done' though.
+- The platform now includes optiboot.  This bootloader is better in every way than the previous version, so it is recommended in all cases.  The prior one is included for reference.
 
 ## Installation
 
