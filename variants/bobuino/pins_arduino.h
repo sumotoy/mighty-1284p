@@ -31,17 +31,13 @@
 
 #define NUM_DIGITAL_PINS            32
 #define NUM_ANALOG_INPUTS           8
-#define analogInputToDigitalPin(p)  ((p < NUM_ANALOG_INPUTS) ? 21 - (p) : -1)
-
-extern const uint8_t digital_pin_to_pcint[NUM_DIGITAL_PINS];
-extern const uint16_t __pcmsk[];
-extern const uint8_t digital_pin_to_timer_PGM[NUM_DIGITAL_PINS];
+#define analogInputToDigitalPin(p)  ((p < NUM_ANALOG_INPUTS) ? (p) + 14 : -1)
 
 #define ifpin(p,what,ifnot)	    (((p) >= 0 && (p) < NUM_DIGITAL_PINS) ? (what) : (ifnot))
 #define digitalPinHasPWM(p)         ifpin(p,pgm_read_byte(digital_pin_to_timer_PGM + (p)) != NOT_ON_TIMER,1==0)
 
 #define digitalPinToAnalogPin(p)    ( (p) >= 14 && (p) <= 21 ? (p) - 14 : -1 )
-#define analogPinToChannel(p)	    ( (p) < NUM_ANALOG_INPUTS ? NUM_ANALOG_INPUTS - (p) : -1 )
+#define analogPinToChannel(p)       ( (p) < NUM_ANALOG_INPUTS ? (NUM_ANALOG_INPUTS-1) - (p) : -1 ) // test to see if A0-A7 are off by 1
 
 static const uint8_t SS   = 10;
 static const uint8_t MOSI = 11;
