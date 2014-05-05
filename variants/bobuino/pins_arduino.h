@@ -32,12 +32,10 @@
 #define NUM_DIGITAL_PINS            32
 #define NUM_ANALOG_INPUTS           8
 #define analogInputToDigitalPin(p)  ((p < NUM_ANALOG_INPUTS) ? (p) + 14 : -1)
-
-#define ifpin(p,what,ifnot)	    (((p) >= 0 && (p) < NUM_DIGITAL_PINS) ? (what) : (ifnot))
+#define ifpin(p,what,ifnot)         (((p) >= 0 && (p) < NUM_DIGITAL_PINS) ? (what) : (ifnot))
 #define digitalPinHasPWM(p)         ifpin(p,pgm_read_byte(digital_pin_to_timer_PGM + (p)) != NOT_ON_TIMER,1==0)
-
 #define digitalPinToAnalogPin(p)    ( (p) >= 14 && (p) <= 21 ? (p) - 14 : -1 )
-#define analogPinToChannel(p)       ( (p) < NUM_ANALOG_INPUTS ? (NUM_ANALOG_INPUTS-1) - (p) : -1 ) // test to see if A0-A7 are off by 1
+#define analogPinToChannel(p)       ((p) < NUM_ANALOG_INPUTS) ? (7 - (p)) : ((p)  >=  14 && (p) <= 21) ? (21 - (p)) : -1    //required macro for mighty-1284p core
 
 static const uint8_t SS   = 10;
 static const uint8_t MOSI = 11;
@@ -46,7 +44,7 @@ static const uint8_t SCK  = 13;
 
 static const uint8_t SDA = 23;
 static const uint8_t SCL = 22;
-static const uint8_t LED = 13;
+static const uint8_t LED_BUILTIN = 13;
 
 static const uint8_t A0 = 14;
 static const uint8_t A1 = 15;
