@@ -18,6 +18,25 @@ mighty_opt.build.variant=standard
 
 ##############################################################
 
+#http://github.com/JChristensen/mini1284
+mightymini.name=Mighty Mini 1284p @ 16MHz, Optiboot @ 1Mbps
+mightymini.upload.protocol=arduino
+mightymini.upload.maximum_size=130048
+mightymini.upload.speed=1000000
+mightymini.bootloader.low_fuses=0xff
+mightymini.bootloader.high_fuses=0xde
+mightymini.bootloader.extended_fuses=0xfd
+mightymini.bootloader.path=optiboot
+mightymini.bootloader.file=optiboot_mighty1284p_1M.hex
+mightymini.bootloader.unlock_bits=0x3F
+mightymini.bootloader.lock_bits=0x0F
+mightymini.build.mcu=atmega1284p
+mightymini.build.f_cpu=16000000L
+mightymini.build.core=mighty
+mightymini.build.variant=standard
+
+##############################################################
+
 avr_developers.name=avr-developers.com pinouts 16MHz using Optiboot
 avr_developers.upload.protocol=arduino
 avr_developers.upload.maximum_size=130048
