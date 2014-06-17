@@ -55,6 +55,8 @@
 //                   +--------+
 //
 
+#define MIGHTY_1284P_VARIANT "AVR_DEVELOPERS"
+
 #define NUM_DIGITAL_PINS            32
 #define NUM_ANALOG_INPUTS           8
 #define analogInputToDigitalPin(p)  ((p < NUM_ANALOG_INPUTS) ? 31 - (p) : -1)
@@ -84,149 +86,221 @@ static const uint8_t A7 = 31;
 #define digitalPinToPCMSK(p)    (((p) <= 7) ? (&PCMSK2) : (((p) <= 13) ? (&PCMSK0) : (((p) <= 21) ? (&PCMSK1) : ((uint8_t *)0))))
 #define digitalPinToPCMSKbit(p) ((p) % 8)
 
-#ifdef ARDUINO_MAIN
-
 #define PA 1
 #define PB 2
 #define PC 3
 #define PD 4
 
+// specify port for each pin D0-D31
+#define PORT_D0 PB
+#define PORT_D1 PB
+#define PORT_D2 PB
+#define PORT_D3 PB
+#define PORT_D4 PB
+#define PORT_D5 PB
+#define PORT_D6 PB
+#define PORT_D7 PB
+#define PORT_D8 PD
+#define PORT_D9 PD
+#define PORT_D10 PD
+#define PORT_D11 PD
+#define PORT_D12 PD
+#define PORT_D13 PD
+#define PORT_D14 PD
+#define PORT_D15 PD
+#define PORT_D16 PC
+#define PORT_D17 PC
+#define PORT_D18 PC
+#define PORT_D19 PC
+#define PORT_D20 PC
+#define PORT_D21 PC
+#define PORT_D22 PC
+#define PORT_D23 PC
+#define PORT_D24 PA
+#define PORT_D25 PA
+#define PORT_D26 PA
+#define PORT_D27 PA
+#define PORT_D28 PA
+#define PORT_D29 PA
+#define PORT_D30 PA
+#define PORT_D31 PA
+
+// specify port bit for each pin D0-D31
+#define BIT_D0 0
+#define BIT_D1 1
+#define BIT_D2 2
+#define BIT_D3 3
+#define BIT_D4 4
+#define BIT_D5 5
+#define BIT_D6 6
+#define BIT_D7 7
+#define BIT_D8 0
+#define BIT_D9 1
+#define BIT_D10 2
+#define BIT_D11 3
+#define BIT_D12 4
+#define BIT_D13 5
+#define BIT_D14 6
+#define BIT_D15 7
+#define BIT_D16 0
+#define BIT_D17 1
+#define BIT_D18 2
+#define BIT_D19 3
+#define BIT_D20 4
+#define BIT_D21 5
+#define BIT_D22 6
+#define BIT_D23 7
+#define BIT_D24 0
+#define BIT_D25 1
+#define BIT_D26 2
+#define BIT_D27 3
+#define BIT_D28 4
+#define BIT_D29 5
+#define BIT_D30 6
+#define BIT_D31 7
+
+// macro equivalents of PROGMEM arrays port_to_mode_PGM[] etc. below
+#define PORT_TO_MODE(x) (x == 1 ? &DDRA : (x == 2 ? &DDRB : (x == 3 ? &DDRC : (x == 4 ? &DDRD : NOT_A_PORT)))) 
+#define PORT_TO_OUTPUT(x) (x == 1 ? &PORTA : (x == 2 ? &PORTB : (x == 3 ? &PORTC : (x == 4 ? &PORTD : NOT_A_PORT))))
+#define PORT_TO_INPUT(x) (x == 1 ? &PINA : (x == 2 ? &PINB : (x == 3 ? &PINC : (x == 4 ? &PIND : NOT_A_PORT)))) 
+
+#ifdef ARDUINO_MAIN
 // these arrays map port names (e.g. port B) to the
 // appropriate addresses for various functions (e.g. reading
 // and writing)
 const uint16_t PROGMEM port_to_mode_PGM[] =
 {
-	NOT_A_PORT,
-	(uint16_t) &DDRA,
-	(uint16_t) &DDRB,
-	(uint16_t) &DDRC,
-	(uint16_t) &DDRD,
+  NOT_A_PORT,
+  (uint16_t) &DDRA,
+  (uint16_t) &DDRB,
+  (uint16_t) &DDRC,
+  (uint16_t) &DDRD,
 };
 
 const uint16_t PROGMEM port_to_output_PGM[] =
 {
-	NOT_A_PORT,
-	(uint16_t) &PORTA,
-	(uint16_t) &PORTB,
-	(uint16_t) &PORTC,
-	(uint16_t) &PORTD,
+  NOT_A_PORT,
+  (uint16_t) &PORTA,
+  (uint16_t) &PORTB,
+  (uint16_t) &PORTC,
+  (uint16_t) &PORTD,
 };
 
 const uint16_t PROGMEM port_to_input_PGM[] =
 {
-	NOT_A_PORT,
-	(uint16_t) &PINA,
-	(uint16_t) &PINB,
-	(uint16_t) &PINC,
-	(uint16_t) &PIND,
+  NOT_A_PORT,
+  (uint16_t) &PINA,
+  (uint16_t) &PINB,
+  (uint16_t) &PINC,
+  (uint16_t) &PIND,
 };
 
-const uint8_t PROGMEM digital_pin_to_port_PGM[] =
+const uint8_t PROGMEM digital_pin_to_port_PGM[NUM_DIGITAL_PINS] =
 {
-	PB, /* 0 */
-	PB,
-	PB,
-	PB,
-	PB,
-	PB,
-	PB,
-	PB,
-	PD, /* 8 */
-	PD,
-	PD,
-	PD,
-	PD,
-	PD,
-	PD,
-	PD,
-	PC, /* 16 */
-	PC,
-	PC,
-	PC,
-	PC,
-	PC,
-   	PC,
-	PC,
-	PA, /* 24 */
-	PA,
-	PA,
-	PA,
-	PA,
-	PA,
-	PA,
-	PA  /* 31 */
+  PORT_D0,
+  PORT_D1,
+  PORT_D2,
+  PORT_D3,
+  PORT_D4,
+  PORT_D5,
+  PORT_D6,
+  PORT_D7,
+  PORT_D8,
+  PORT_D9,
+  PORT_D10,
+  PORT_D11,
+  PORT_D12,
+  PORT_D13,
+  PORT_D14,
+  PORT_D15,
+  PORT_D16,
+  PORT_D17,
+  PORT_D18,
+  PORT_D19,
+  PORT_D20,
+  PORT_D21,
+  PORT_D22,
+  PORT_D23,
+  PORT_D24,
+  PORT_D25,
+  PORT_D26,
+  PORT_D27,
+  PORT_D28,
+  PORT_D29,
+  PORT_D30,
+  PORT_D31
 };
 
-const uint8_t PROGMEM digital_pin_to_bit_mask_PGM[] =
+const uint8_t PROGMEM digital_pin_to_bit_mask_PGM[NUM_DIGITAL_PINS] =
 {
-	_BV(0), /* 0, port B */
-	_BV(1),
-	_BV(2),
-	_BV(3),
-	_BV(4),
-	_BV(5),
-	_BV(6),
-	_BV(7),
-	_BV(0), /* 8, port D */
-	_BV(1),
-	_BV(2),
-	_BV(3),
-	_BV(4),
-	_BV(5),
-	_BV(6),
-	_BV(7),
-	_BV(0), /* 16, port C */
-	_BV(1),
-	_BV(2),
-	_BV(3),
-	_BV(4),
-	_BV(5),
-	_BV(6),
-	_BV(7),
-	_BV(7), /* 24, port A */
-	_BV(6),
-	_BV(5),
-	_BV(4),
-	_BV(3),
-	_BV(2),
-	_BV(1),
-	_BV(0)
+  _BV(BIT_D0),
+  _BV(BIT_D1),
+  _BV(BIT_D2),
+  _BV(BIT_D3),
+  _BV(BIT_D4),
+  _BV(BIT_D5),
+  _BV(BIT_D6),
+  _BV(BIT_D7),
+  _BV(BIT_D8),
+  _BV(BIT_D9),
+  _BV(BIT_D10),
+  _BV(BIT_D11),
+  _BV(BIT_D12),
+  _BV(BIT_D13),
+  _BV(BIT_D14),
+  _BV(BIT_D15),
+  _BV(BIT_D16),
+  _BV(BIT_D17),
+  _BV(BIT_D18),
+  _BV(BIT_D19),
+  _BV(BIT_D20),
+  _BV(BIT_D21),
+  _BV(BIT_D22),
+  _BV(BIT_D23),
+  _BV(BIT_D24),
+  _BV(BIT_D25),
+  _BV(BIT_D26),
+  _BV(BIT_D27),
+  _BV(BIT_D28),
+  _BV(BIT_D29),
+  _BV(BIT_D30),
+  _BV(BIT_D31)
 };
 
 const uint8_t PROGMEM digital_pin_to_timer_PGM[] =
 {
-	NOT_ON_TIMER, 	/* 0  - PB0 */
-	NOT_ON_TIMER, 	/* 1  - PB1 */
-	NOT_ON_TIMER, 	/* 2  - PB2 */
-	TIMER0A,     	/* 3  - PB3 */
-	TIMER0B, 		/* 4  - PB4 */
-	NOT_ON_TIMER, 	/* 5  - PB5 */
-	NOT_ON_TIMER, 	/* 6  - PB6 */
-	NOT_ON_TIMER,	/* 7  - PB7 */
-	NOT_ON_TIMER, 	/* 8  - PD0 */
-	NOT_ON_TIMER, 	/* 9  - PD1 */
-	NOT_ON_TIMER, 	/* 10 - PD2 */
-	NOT_ON_TIMER, 	/* 11 - PD3 */
-	TIMER1B,     	/* 12 - PD4 */
-	TIMER1A,     	/* 13 - PD5 */
-	TIMER2B,     	/* 14 - PD6 */
-	TIMER2A,     	/* 15 - PD7 */
-	NOT_ON_TIMER, 	/* 16 - PC0 */
-	NOT_ON_TIMER,   /* 17 - PC1 */
-	NOT_ON_TIMER,   /* 18 - PC2 */
-	NOT_ON_TIMER,   /* 19 - PC3 */
-	NOT_ON_TIMER,   /* 20 - PC4 */
-	NOT_ON_TIMER,   /* 21 - PC5 */
-	NOT_ON_TIMER,   /* 22 - PC6 */
-	NOT_ON_TIMER,   /* 23 - PC7 */
-	NOT_ON_TIMER,   /* 24 - PA0 */
-	NOT_ON_TIMER,   /* 25 - PA1 */
-	NOT_ON_TIMER,   /* 26 - PA2 */
-	NOT_ON_TIMER,   /* 27 - PA3 */
-	NOT_ON_TIMER,   /* 28 - PA4 */
-	NOT_ON_TIMER,   /* 29 - PA5 */
-	NOT_ON_TIMER,   /* 30 - PA6 */
-	NOT_ON_TIMER   /* 31 - PA7 */
+  NOT_ON_TIMER, /* 0  - PB0 */
+  NOT_ON_TIMER, /* 1  - PB1 */
+  NOT_ON_TIMER, /* 2  - PB2 */
+  TIMER0A,     	/* 3  - PB3 */
+  TIMER0B,      /* 4  - PB4 */
+  NOT_ON_TIMER, /* 5  - PB5 */
+  NOT_ON_TIMER, /* 6  - PB6 */
+  NOT_ON_TIMER,	/* 7  - PB7 */
+  NOT_ON_TIMER, /* 8  - PD0 */
+  NOT_ON_TIMER, /* 9  - PD1 */
+  NOT_ON_TIMER, /* 10 - PD2 */
+  NOT_ON_TIMER, /* 11 - PD3 */
+  TIMER1B,     	/* 12 - PD4 */
+  TIMER1A,     	/* 13 - PD5 */
+  TIMER2B,     	/* 14 - PD6 */
+  TIMER2A,     	/* 15 - PD7 */
+  NOT_ON_TIMER, /* 16 - PC0 */
+  NOT_ON_TIMER, /* 17 - PC1 */
+  NOT_ON_TIMER, /* 18 - PC2 */
+  NOT_ON_TIMER, /* 19 - PC3 */
+  NOT_ON_TIMER, /* 20 - PC4 */
+  NOT_ON_TIMER, /* 21 - PC5 */
+  NOT_ON_TIMER, /* 22 - PC6 */
+  NOT_ON_TIMER, /* 23 - PC7 */
+  NOT_ON_TIMER, /* 24 - PA0 */
+  NOT_ON_TIMER, /* 25 - PA1 */
+  NOT_ON_TIMER, /* 26 - PA2 */
+  NOT_ON_TIMER, /* 27 - PA3 */
+  NOT_ON_TIMER, /* 28 - PA4 */
+  NOT_ON_TIMER, /* 29 - PA5 */
+  NOT_ON_TIMER, /* 30 - PA6 */
+  NOT_ON_TIMER  /* 31 - PA7 */
 };
 #endif // ARDUINO_MAIN
 #endif // Pins_Arduino_h
