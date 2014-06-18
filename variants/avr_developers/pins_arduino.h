@@ -61,6 +61,7 @@
 #define NUM_ANALOG_INPUTS           8
 #define analogInputToDigitalPin(p)  ((p < NUM_ANALOG_INPUTS) ? 31 - (p) : -1)
 #define digitalPinHasPWM(p)         ((p) == 3 || (p) == 4 || (p) == 6 || (p) == 7 || (p) == 12 || (p) == 13 || (p) == 14 || (p) == 15)
+#define digitalPinToAnalogPin(p)    ( (p) >= 24 && (p) <= 31 ? (p) - 24 : -1 )
 #define analogPinToChannel(p)       ((p) < NUM_ANALOG_INPUTS) ? (p) : ((p)  >=  24) ? (31 - (p)) : -1    //required macro for mighty-1284p core
 
 static const uint8_t SS   = 4;
