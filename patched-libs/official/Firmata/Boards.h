@@ -245,8 +245,31 @@ writePort(port, value, bitmask):  Write an 8 bit port.
 #define PIN_TO_SERVO(p)         (p)
 
 
+#elif defined(__AVR_ATmega1284P__)\
+|| defined(__AVR_ATmega1284__)\
+|| defined(__AVR_ATmega644P__)\
+|| defined(__AVR_ATmega644__)\
+|| defined(__AVR_ATmega64__)\
+|| defined(__AVR_ATmega32__)\
+|| defined(__AVR_ATmega324__)\
+|| defined(__AVR_ATmega16__)
+
+ #if defined(MIGHTY_1284P_VARIANT)
+// from pins_arduino.h in mighty-1284p core
+#define TOTAL_ANALOG_PINS       8
+#define TOTAL_PINS              32 // 24 digital + 8 analog
+#define VERSION_BLINK_PIN       LED_BUILTIN
+#define IS_PIN_DIGITAL(p)       ((p) >= 2 && (p) < TOTAL_PINS)
+#define IS_PIN_ANALOG(p)        (digitalPinToAnalogPin(p) >= 0)
+#define IS_PIN_PWM(p)           digitalPinHasPWM(p)
+#define IS_PIN_SERVO(p)         (IS_PIN_DIGITAL(p) && (p) - 2 < MAX_SERVOS)
+#define IS_PIN_I2C(p)           ((p) == SDA || (p) == SCL)
+#define PIN_TO_DIGITAL(p)       (p)
+#define PIN_TO_ANALOG(p)        digitalPinToAnalogPin(p)
+#define PIN_TO_PWM(p)           PIN_TO_DIGITAL(p)
+#define PIN_TO_SERVO(p)         ((p) - 2)
+ #else
 // Sanguino
-#elif defined(__AVR_ATmega644P__) || defined(__AVR_ATmega644__)
 #define TOTAL_ANALOG_PINS       8
 #define TOTAL_PINS              32 // 24 digital + 8 analog
 #define VERSION_BLINK_PIN       0
@@ -259,7 +282,7 @@ writePort(port, value, bitmask):  Write an 8 bit port.
 #define PIN_TO_ANALOG(p)        ((p) - 24)
 #define PIN_TO_PWM(p)           PIN_TO_DIGITAL(p)
 #define PIN_TO_SERVO(p)         ((p) - 2)
-
+ #endif
 
 // Illuminato
 #elif defined(__AVR_ATmega645__)
