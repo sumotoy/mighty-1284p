@@ -376,6 +376,8 @@ void SoftwareSerial::setRX(uint8_t rx)
 // Public methods
 //
 
+extern const uint8_t digital_pin_to_pcint[]; // this extern needed for mighty-1284p core support
+
 void SoftwareSerial::begin(long speed)
 {
   _rx_delay_centering = _rx_delay_intrabit = _rx_delay_stopbit = _tx_delay = 0;
