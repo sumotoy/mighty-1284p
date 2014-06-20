@@ -38,10 +38,28 @@ https://github.com/BlueVia/Official-Arduino
 #include <HardwareSerial.h>
 #include <Arduino.h>
 
+extern const uint8_t digital_pin_to_pcint[]; // this extern needed for mighty-1284p core support
+
 #if defined(__AVR_ATmega328P__) 
 #define __TXPIN__ 3
 #define __RXPIN__ 2
 #define __RXINT__ 3
+#elif defined(__AVR_ATmega1284__) || defined(__AVR_ATmega1284P__)\
+|| defined(__AVR_ATmega1284__)\
+|| defined(__AVR_ATmega644P__)\
+|| defined(__AVR_ATmega644__)\
+|| defined(__AVR_ATmega64__)\
+|| defined(__AVR_ATmega32__)\
+|| defined(__AVR_ATmega324__)\
+|| defined(__AVR_ATmega16__)
+
+ #if defined(MIGHTY_1284P_VARIANT)
+#define __TXPIN__ 3
+#define __RXPIN__ 2
+#define __RXINT__ digital_pin_to_pcint[__RXPIN__]
+ #else
+#error No support for this board type found in GSM3SoftSerial.cpp!
+ #endif
 #elif defined(__AVR_ATmega2560__) || defined(__AVR_ATmega1280__)
 #define __TXPIN__ 3
 #define __RXPIN__ 10
@@ -50,6 +68,8 @@ https://github.com/BlueVia/Official-Arduino
 #define __TXPIN__ 3
 #define __RXPIN__ 8
 #define __RXINT__ 3
+#else
+#error No support for this board type found in GSM3SoftSerial.cpp!
 #endif
 
 #define __XON__ 0x11
