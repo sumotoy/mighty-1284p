@@ -57,9 +57,11 @@ static const uint8_t A5 = 19;
 static const uint8_t A6 = 20;
 static const uint8_t A7 = 21;
 
+#define PORT_NDX_TO_PCMSK(x) ((x) == 0 ? &PCMSK0 : ((x) == 1 ? &PCMSK1 : ((x) == 2 ? &PCMSK2 : ((x) == 3 ? &PCMSK3 : (uint8_t )0))))
+
 #define digitalPinToPCICR(p)    ifpin(p,&PCICR,(uint8_t *)0)
 #define digitalPinToPCICRbit(p) ifpin(p,digital_pin_to_pcint[p] >> 3,0)
-#define digitalPinToPCMSK(p)    ifpin(p,(uint8_t *)__pcmsk[digital_pin_to_pcint[p]],(uint8_t *)0)
+#define digitalPinToPCMSK(p)    ifpin(p,(uint8_t *)PORT_NDX_TO_PCMSK(digital_pin_to_pcint[p] >> 3),(uint8_t *)0)
 #define digitalPinToPCMSKbit(p) ifpin(p,digital_pin_to_pcint[p] & 0x7,0)
 
 #define PA 1
@@ -176,14 +178,6 @@ const uint8_t digital_pin_to_pcint[NUM_DIGITAL_PINS] =
   23, // D29 PC7
   28, // D30 PD4
   31, // D31 PD7
-};
-
-const uint16_t __pcmsk[] = 
-{
-  (uint16_t)&PCMSK0, 
-  (uint16_t)&PCMSK1, 
-  (uint16_t)&PCMSK2, 
-  (uint16_t)&PCMSK3
 };
 
 // these arrays map port names (e.g. port B) to the
