@@ -58,9 +58,9 @@ static const uint8_t A6 = 20;
 static const uint8_t A7 = 21;
 
 #define digitalPinToPCICR(p)    ifpin(p,&PCICR,(uint8_t *)0)
-#define digitalPinToPCICRbit(p) ifpin(p,digital_pin_to_pcint[p] >> 3,(uint8_t *)0)
-#define digitalPinToPCMSK(p)    ifpin(p,__pcmsk[digital_pin_to_pcint[]],(uint8_t *)0)
-#define digitalPinToPCMSKbit(p) ifpin(p,digital_pin_to_pcint[p] & 0x7,(uint8_t *)0)
+#define digitalPinToPCICRbit(p) ifpin(p,digital_pin_to_pcint[p] >> 3,0)
+#define digitalPinToPCMSK(p)    ifpin(p,(uint8_t *)__pcmsk[digital_pin_to_pcint[p]],(uint8_t *)0)
+#define digitalPinToPCMSKbit(p) ifpin(p,digital_pin_to_pcint[p] & 0x7,0)
 
 #define PA 1
 #define PB 2
@@ -139,7 +139,7 @@ static const uint8_t A7 = 21;
 #define PORT_TO_MODE(x) (x == 1 ? &DDRA : (x == 2 ? &DDRB : (x == 3 ? &DDRC : (x == 4 ? &DDRD : NOT_A_PORT)))) 
 #define PORT_TO_OUTPUT(x) (x == 1 ? &PORTA : (x == 2 ? &PORTB : (x == 3 ? &PORTC : (x == 4 ? &PORTD : NOT_A_PORT))))
 #define PORT_TO_INPUT(x) (x == 1 ? &PINA : (x == 2 ? &PINB : (x == 3 ? &PINC : (x == 4 ? &PIND : NOT_A_PORT)))) 
- 
+
 #ifdef ARDUINO_MAIN
 
 const uint8_t digital_pin_to_pcint[NUM_DIGITAL_PINS] =
