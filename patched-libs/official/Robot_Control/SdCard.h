@@ -17,6 +17,10 @@
  * along with the Arduino Fat16 Library.  If not, see
  * <http://www.gnu.org/licenses/>.
  */
+#ifndef Arduino_h
+#include <Arduino.h>
+#endif
+
 #ifndef SdCard_h
 #define SdCard_h
  /**
@@ -48,14 +52,24 @@ uint8_t const SPI_MOSI_PIN = 51;
 uint8_t const SPI_MISO_PIN = 50;
 uint8_t const SPI_SCK_PIN  = 52;
 //------------------------------------------------------------------------------
-#elif defined(__AVR_ATmega644P__)\
-|| defined(__AVR_ATmega644__)\
-|| defined(__AVR_ATmega1284P__)
-// pins for Sanguino
+#elif defined(__AVR_ATmega1284__) || defined(__AVR_ATmega1284P__) \
+  || defined(__AVR_ATmega644__)  || defined(__AVR_ATmega644A__) \
+  || defined(__AVR_ATmega644P__)  || defined(__AVR_ATmega644PA__)
+
+ #if defined(MIGHTY_1284P_VARIANT)
+// from pins_arduino.h in mighty-1284p core
+uint8_t const SPI_SS_PIN   = SS;
+uint8_t const SPI_MOSI_PIN = MOSI;
+uint8_t const SPI_MISO_PIN = MISO;
+uint8_t const SPI_SCK_PIN  = SCK;
+ #else
+// else, assume Sanguino pin assignments
+#warning "SANGUINO PIN ASSIGMENT ASSUMED (SdCard.h)"
 uint8_t const SPI_SS_PIN   = 4;
 uint8_t const SPI_MOSI_PIN = 5;
 uint8_t const SPI_MISO_PIN = 6;
 uint8_t const SPI_SCK_PIN  = 7;
+ #endif
 //------------------------------------------------------------------------------
 #elif defined(__AVR_ATmega32U4__)
 // pins for Teensy 2.0
