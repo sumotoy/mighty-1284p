@@ -41,6 +41,7 @@ struct pin_map_t {
   uint8_t bit;             /**< bit number for this pin */
 };
 //------------------------------------------------------------------------------
+
 #if defined(__AVR_ATmega168__)\
 ||defined(__AVR_ATmega168P__)\
 ||defined(__AVR_ATmega328P__)
@@ -152,7 +153,51 @@ static const pin_map_t pinMap[] = {
 || defined(__AVR_ATmega32__)\
 || defined(__AVR_ATmega324__)\
 || defined(__AVR_ATmega16__)
-// Mighty Layout
+
+ #if defined(MIGHTY_1284P_VARIANT)
+// from pins_arduino.h in mighty-1284p core
+
+#define DPM(x) { PORT_TO_MODE(PORT_D##x), PORT_TO_INPUT(PORT_D##x), PORT_TO_OUTPUT(PORT_D##x), BIT_D##x }
+
+static const pin_map_t pinMap[NUM_DIGITAL_PINS] = {
+  DPM(0),
+  DPM(1),
+  DPM(2),
+  DPM(3),
+  DPM(4),
+  DPM(5),
+  DPM(6),
+  DPM(7),
+  DPM(8),
+  DPM(9),
+  DPM(10),
+  DPM(11),
+  DPM(12),
+  DPM(13),
+  DPM(14),
+  DPM(15),
+  DPM(16),
+  DPM(17),
+  DPM(18),
+  DPM(19),
+  DPM(20),
+  DPM(21),
+  DPM(22),
+  DPM(23),
+  DPM(24),
+  DPM(25),
+  DPM(26),
+  DPM(27),
+  DPM(28),
+  DPM(29),
+  DPM(30),
+  DPM(31)
+};
+
+#undef DPM
+
+ #else
+// original Mighty Layout
 static const pin_map_t pinMap[] = {
   {&DDRB, &PINB, &PORTB, 0},  // B0  0
   {&DDRB, &PINB, &PORTB, 1},  // B1  1
@@ -187,6 +232,7 @@ static const pin_map_t pinMap[] = {
   {&DDRA, &PINA, &PORTA, 6},  // A6 30
   {&DDRA, &PINA, &PORTA, 7}   // A7 31
 };
+ #endif
 //------------------------------------------------------------------------------
 #elif defined(__AVR_ATmega32U4__)
 #ifdef CORE_TEENSY
