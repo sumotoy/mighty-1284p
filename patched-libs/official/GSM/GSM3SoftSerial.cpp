@@ -38,8 +38,6 @@ https://github.com/BlueVia/Official-Arduino
 #include <HardwareSerial.h>
 #include <Arduino.h>
 
-extern const uint8_t digital_pin_to_pcint[]; // this extern needed for mighty-1284p core support
-
 #if defined(__AVR_ATmega328P__) 
 #define __TXPIN__ 3
 #define __RXPIN__ 2

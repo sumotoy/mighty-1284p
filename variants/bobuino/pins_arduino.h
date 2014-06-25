@@ -142,8 +142,9 @@ static const uint8_t A7 = 21;
 #define PORT_TO_OUTPUT(x) (x == 1 ? &PORTA : (x == 2 ? &PORTB : (x == 3 ? &PORTC : (x == 4 ? &PORTD : NOT_A_PORT))))
 #define PORT_TO_INPUT(x) (x == 1 ? &PINA : (x == 2 ? &PINB : (x == 3 ? &PINC : (x == 4 ? &PIND : NOT_A_PORT)))) 
 
-#ifdef ARDUINO_MAIN
-
+#ifndef ARDUINO_MAIN
+extern const uint8_t digital_pin_to_pcint[];
+#else
 const uint8_t digital_pin_to_pcint[NUM_DIGITAL_PINS] =
 {
   24, // D0 PD0
