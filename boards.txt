@@ -13,7 +13,7 @@ mighty_opt.bootloader.unlock_bits=0x3F
 mighty_opt.bootloader.lock_bits=0x0F
 mighty_opt.build.mcu=atmega1284p
 mighty_opt.build.f_cpu=16000000L
-mighty_opt.build.core=mighty
+mighty_opt.build.core=arduino:arduino
 mighty_opt.build.variant=standard
 
 ##############################################################
@@ -32,7 +32,7 @@ mightymini.bootloader.unlock_bits=0x3F
 mightymini.bootloader.lock_bits=0x0F
 mightymini.build.mcu=atmega1284p
 mightymini.build.f_cpu=16000000L
-mightymini.build.core=mighty
+mightymini.build.core=arduino:arduino
 mightymini.build.variant=standard
 
 ##############################################################
@@ -50,7 +50,7 @@ avr_developers.bootloader.unlock_bits=0x3F
 avr_developers.bootloader.lock_bits=0x0F
 avr_developers.build.mcu=atmega1284p
 avr_developers.build.f_cpu=16000000L
-avr_developers.build.core=mighty
+avr_developers.build.core=arduino:arduino
 avr_developers.build.variant=avr_developers
 
 ##############################################################
@@ -68,7 +68,7 @@ bobuino.bootloader.unlock_bits=0x3F
 bobuino.bootloader.lock_bits=0x0F
 bobuino.build.mcu=atmega1284p
 bobuino.build.f_cpu=16000000L
-bobuino.build.core=mighty
+bobuino.build.core=arduino:arduino
 bobuino.build.variant=bobuino
 
 ##############################################################
@@ -87,5 +87,5 @@ mm8.bootloader.unlock_bits=0x3F
 mm8.bootloader.lock_bits=0x0F
 mm8.build.mcu=atmega1284p
 mm8.build.f_cpu=8000000L
-mm8.build.core=mighty
+mm8.build.core=arduino:arduino
 mm8.build.variant=standard
