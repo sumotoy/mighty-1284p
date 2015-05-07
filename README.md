@@ -42,9 +42,11 @@ This is a refreshed version of [maniacbug's mighty-1284p core](https://github.co
 	- sketchbook\hardware\mighty-1284p\README.txt
 	- sketchbook\hardware\mighty-1284p\boards.txt
 
-7.Move any mighty-1284p compatible patched libs under [sketchfolder]\libraries as required.
-8.Restart the Arduino IDE.
-9.Select the desired board from the Tools > Board menu and enjoy those extra pins and all that extra memory!
+7. Move any mighty-1284p compatible patched libs under [sketchfolder]\libraries as required.
+
+8. Restart the Arduino IDE.
+
+9. Select the desired board from the Tools > Board menu and enjoy those extra pins and all that extra memory!
 
 ## Requirements <a name="requirements"></a>
 
