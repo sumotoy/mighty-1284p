@@ -28,7 +28,7 @@ This is a refreshed version of [maniacbug's mighty-1284p core](https://github.co
 
 ## Installation <a name="installation"></a>
 
-1. Go to http://github.com/JChristensen/mighty-1284p, click the **Download ZIP** button and save the ZIP file to a convenient location on your computer.
+1. Go to https://github.com/JChristensen/mighty-1284p/tree/v1.0.5, click the **Download ZIP** button and save the ZIP file to a convenient location on your computer.
 2. Ensure that the Arduino IDE is **not** running.
 3. Go to your Arduino sketchbook folder. If it does not contain a folder named **hardware**, create one.
 4. Unzip the downloaded file into the **hardware** folder.
@@ -36,16 +36,21 @@ This is a refreshed version of [maniacbug's mighty-1284p core](https://github.co
 6. The following folders and files should now exist:
 	- sketchbook\hardware\mighty-1284p\bootloaders
 	- sketchbook\hardware\mighty-1284p\cores
+	- sketchbook\hardware\mighty-1284p\patched-libs
 	- sketchbook\hardware\mighty-1284p\variants
 	- sketchbook\hardware\mighty-1284p\\.gitignore
 	- sketchbook\hardware\mighty-1284p\README.txt
 	- sketchbook\hardware\mighty-1284p\boards.txt
-7. Restart the Arduino IDE.
-8. Select the desired board from the Tools > Board menu and enjoy those extra pins and all that extra memory!
+
+7. Move any mighty-1284p compatible patched libs under [sketchfolder]\libraries as required.
+
+8. Restart the Arduino IDE.
+
+9. Select the desired board from the Tools > Board menu and enjoy those extra pins and all that extra memory!
 
 ## Requirements <a name="requirements"></a>
 
-* Works with Arduino 1.0.5. It may work on other versions as early as 1.0.1 but these have not been tested.
+* Works with Arduino 1.0.5. It may work on other versions as early as 1.0.1 but these have not been tested. For later versions of the Arduino IDE, there is also a v1.0.6 branch, and a v1.6.3 branch for 1.6.x (and possibly some 1.5.x) support. Download and install from the appropriate branch as required for the version of IDE.
 * The [USBtinyISP](http://www.adafruit.com/products/46) is advertised as not able to program chips with more than 64K of flash, however there are varying reports of success using it with the ATmega1284P. Sometimes error messages are given but the upload process seems to have worked OK. Be forewarned. YMMV.
 
 ## See also <a name="seealso"></a>
@@ -54,10 +59,8 @@ http://maniacbug.wordpress.com/2011/11/27/arduino-on-atmega1284p-4/
 
 ## Supported Boards <a name="boards"></a>
 
-* **Mighty 1284p 16MHz using Optiboot** - The main board. Use this unless you have some clear reason to use another board. This uses a straightforward pinout that is especially helpful on a breadboard-built unit.
+* **avr-developers.com pinouts 16MHz using Optiboot** - The classic pinouts.
 * **Bobuino** - [CrossRoads' board](http://crossroadsfencing.com/BobuinoRev17/index.html) built for maximum compatibility with Arduino Uno-class shields.
-* **RFX 1284P Development/Deployment Board** (a.k.a. "Skinny Bob") from [Embedded Coolness](http://embeddedcoolness.com/shop/rfx-1284p-devdep-board-w-prototyping-area-nrf24l01-headers-kit/); has prototyping area, nRF24L01 and Arduino shield compatible headers.
+* **RFX 1284P Development/Deployment Board** (a.k.a. "Skinny Bob") from [Embedded Coolness](http://embeddedcoolness.com/shop/rfx-1284p-devdep-board-w-prototyping-area-nrf24l01-headers-kit/); also built for maximum compatibility with Arduino Uno-class shields, has prototyping area, configurable 5V/3v3 voltage selection, and nRF24L01+ support.
 * **Mighty Mini 1284P** - A small breadboard-friendly version of the Mighty 1284p built with SMT components. Open-source design [available on GitHub](http://goo.gl/5fAHca).
-* **avr-developers.com pinouts 16MHz using Optiboot** - Some people prefer the pinouts from avr-developers.com.  The classic pinouts.
-* **Original Mighty 1284p 16MHz** - The very first bootloader I (maniacbug) ever got working.  Not recommended for use, but here as historical record.
-* **Original Mighty 1284p 8MHz** - Ditto, but runs at 8MHz.
+* **"maniacbug" Mighty 1284p 16MHz using Optiboot** - This uses a straightforward pinout that is especially helpful on a breadboard-built unit.
